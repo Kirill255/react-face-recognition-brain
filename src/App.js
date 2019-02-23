@@ -40,20 +40,17 @@ class App extends Component {
 
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
-    console.log(clarifaiFace); // см. README.md
-    // const image = document.getElementById("inputimage");
-    // const width = Number(image.width);
-    // const height = Number(image.height);
+    // console.log(clarifaiFace); // см. README.md
     return {
       leftCol: (clarifaiFace.left_col * 100).toFixed(4),
       topRow: (clarifaiFace.top_row * 100).toFixed(4),
-      rightCol: (100 - clarifaiFace.right_col * 100).toFixed(4), // 100% - clarifaiFace.right_col * 100
-      bottomRow: (100 - clarifaiFace.bottom_row * 100).toFixed(4) // 100% - clarifaiFace.bottom_row * 100
+      rightCol: (100 - clarifaiFace.right_col * 100).toFixed(4),
+      bottomRow: (100 - clarifaiFace.bottom_row * 100).toFixed(4)
     };
   };
 
   displayFaceBox = (box) => {
-    console.log(box); // высчитанные координаты
+    // console.log(box); // высчитанные координаты
     this.setState({ box: box });
   };
 
@@ -62,7 +59,7 @@ class App extends Component {
   };
 
   onButtonSubmit = () => {
-    this.setState({ imageUrl: this.state.input });
+    this.setState({ imageUrl: this.state.input, box: {} });
 
     // https://clarifai.com/models/face-detection-image-recognition-model-a403429f2ddf4b49b307e318f00e528b-detection
     // https://github.com/Clarifai/clarifai-javascript/blob/master/src/index.js
