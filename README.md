@@ -118,3 +118,42 @@ The returned ‘bounding_box’ values are the coordinates of the box outlining 
   ]
 }
 ```
+
+### Calculating points X,Y from a Bounding box for the original image size
+
+Ask:
+
+http://community.clarifai.com/t/calculating-points-x-y-from-a-bounding-box-for-the-original-image-size/769
+
+I'm new to Face Model's bounding box values here, so I need some help. Based on the description Face Detection Model's response on this page https://www.clarifai.com/models/face-detection-image-recognition-model/a403429f2ddf4b49b307e318f00e528b#documentation23, how would you calculate to arrive at top-left corner at (208 x, 83 y) and bottom-right corner at (175 x, 139 y)? If anyone can help me understand this calculation so I can draw a blurry box around the face on the original image.
+
+given original image size 500 width, 333 height
+Bounding Box:{
+"top_row": 0.22296476,
+"left_col": 0.6717238,
+"bottom_row": 0.33909792,
+"right_col": 0.74911636
+}
+
+the top-left coordinate of the image is (0.0, 0.0), and the bottom-right of the image is (1.0, 1.0)
+
+Answer:
+
+Hi @phpgiik - the calculations are essentially percentages that are measures from the (0,0) top-left corner of the image and you can interpret them as:
+
+The Top Left Corner of the bounding box is 22% from the top and 67% from the Left
+The Bottom Right Corner of the bounding box is 33% from the top and 75% from the left
+
+The corresponding "pixel" coordinates of this box would be:
+
+Top Left: (335, 74)
+Bottom Right: (375, 110)
+
+Let me know if you have any follow-up questions on this!
+
+От себя:
+
+в прошлый раз мы высчитывали размеры в px, но в % вроде бы точнее получается, поэтому переделал на %, из ответа выше у нас картинка это 100%, а все координаты идут сверху и слева,
+тоесть и нижняя координата отсчитывается сверху и правая координата указана в размере от левого края, у стили мы указываем как 'position: absolute', left, top, right, bottom, поэтому для right и bottom нам нужно из 100% вычесть полученный размер
+
+![bounding-box-size](https://user-images.githubusercontent.com/24504648/53287643-3ffeeb00-3790-11e9-9fb9-83083505091e.png)

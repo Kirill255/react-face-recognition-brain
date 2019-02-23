@@ -41,14 +41,14 @@ class App extends Component {
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     console.log(clarifaiFace); // см. README.md
-    const image = document.getElementById("inputimage");
-    const width = Number(image.width);
-    const height = Number(image.height);
+    // const image = document.getElementById("inputimage");
+    // const width = Number(image.width);
+    // const height = Number(image.height);
     return {
-      leftCol: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightCol: width - clarifaiFace.right_col * width, // width - (clarifaiFace.right_col * width)
-      bottomRow: height - clarifaiFace.bottom_row * height // height - (clarifaiFace.bottom_row * height)
+      leftCol: (clarifaiFace.left_col * 100).toFixed(4),
+      topRow: (clarifaiFace.top_row * 100).toFixed(4),
+      rightCol: (100 - clarifaiFace.right_col * 100).toFixed(4), // 100% - clarifaiFace.right_col * 100
+      bottomRow: (100 - clarifaiFace.bottom_row * 100).toFixed(4) // 100% - clarifaiFace.bottom_row * 100
     };
   };
 
