@@ -5,32 +5,33 @@ class Signin extends Component {
     super(props);
 
     this.state = {
-      signInEmail: "",
-      signInPassword: ""
+      email: "",
+      password: ""
     };
   }
 
   onEmailChange = (event) => {
-    this.setState({ signInEmail: event.target.value });
+    this.setState({ email: event.target.value });
   };
 
   onPasswordChange = (event) => {
-    this.setState({ signInPassword: event.target.value });
+    this.setState({ password: event.target.value });
   };
 
-  onSubmitSignIn = (event) => {
+  onSubmit = (event) => {
     event.preventDefault();
     fetch("http://localhost:3001/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: this.state.signInEmail,
-        password: this.state.signInPassword
+        email: this.state.email,
+        password: this.state.password
       })
     })
       .then((response) => response.json())
-      .then((data) => {
-        if (data === "signed in") {
+      .then((user) => {
+        if (user) {
+          this.props.loadUser(user);
           this.props.onRouteChange("home");
         }
       })
@@ -75,7 +76,7 @@ class Signin extends Component {
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
                 value="Sign in"
-                onClick={this.onSubmitSignIn}
+                onClick={this.onSubmit}
               />
             </div>
             <div className="lh-copy mt3">
