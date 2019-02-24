@@ -1,4 +1,10 @@
+# react-face-recognition-brain
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Backend
+
+https://github.com/Kirill255/face-recognition-brain-api
 
 ## Advanced setState()
 
