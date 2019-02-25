@@ -29,24 +29,26 @@ const particlesOptions = {
   }
 };
 
+const initialState = {
+  input: "",
+  imageUrl: "",
+  box: {},
+  route: "signin",
+  isSignedIn: false,
+  user: {
+    id: "",
+    name: "",
+    email: "",
+    entries: 0,
+    joined: ""
+  }
+};
+
 class App extends Component {
   constructor() {
     super();
 
-    this.state = {
-      input: "",
-      imageUrl: "",
-      box: {},
-      route: "signin",
-      isSignedIn: false,
-      user: {
-        id: "",
-        name: "",
-        email: "",
-        entries: 0,
-        joined: ""
-      }
-    };
+    this.state = initialState;
   }
 
   loadUser = (user) => {
@@ -102,7 +104,8 @@ class App extends Component {
             .then((count) => {
               // this.setState({ user: { entries: count } }); // NO! это полностью заменит объект user, тоесть он будет таким user: { entries: 1 }, а нам нужно изменить в объекте только поле entries, а не сам объект user: { id: "", name: "", email: "", entries: 1, joined: "" }
               this.setState(Object.assign(this.state.user, { entries: count }));
-            });
+            })
+            .catch((err) => console.log(err));
         }
         this.displayFaceBox(this.calculateFaceLocation(response));
       })
@@ -111,7 +114,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === "signout") {
-      this.setState({ isSignedIn: false });
+      this.setState(initialState);
     } else if (route === "home") {
       this.setState({ isSignedIn: true });
     }

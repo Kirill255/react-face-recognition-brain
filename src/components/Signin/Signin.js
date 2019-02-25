@@ -30,7 +30,8 @@ class Signin extends Component {
     })
       .then((response) => response.json())
       .then((user) => {
-        if (user) {
+        // наш сервер возвращает ответ в любом случае, тоесть даже если пришёл на юзер а "Wrong credentials", поэтому мы проверим есть ли в ответе id
+        if (user.id) {
           this.props.loadUser(user);
           this.props.onRouteChange("home");
         }
