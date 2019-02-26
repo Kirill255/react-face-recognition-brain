@@ -84,7 +84,7 @@ class App extends Component {
     // https://clarifai.com/models/face-detection-image-recognition-model-a403429f2ddf4b49b307e318f00e528b-detection
     // https://github.com/Clarifai/clarifai-javascript/blob/master/src/index.js
 
-    fetch("http://localhost:3001/imageurl", {
+    fetch("https://recognition-api.herokuapp.com/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -94,7 +94,7 @@ class App extends Component {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch("http://localhost:3001/image", {
+          fetch("https://recognition-api.herokuapp.com/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

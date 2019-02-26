@@ -25,7 +25,7 @@ class Register extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3001/register", {
+    fetch("https://recognition-api.herokuapp.com/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

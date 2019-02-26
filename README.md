@@ -163,3 +163,11 @@ Let me know if you have any follow-up questions on this!
 тоесть и нижняя координата отсчитывается сверху и правая координата указана в размере от левого края, у стили мы указываем как 'position: absolute', left, top, right, bottom, поэтому для right и bottom нам нужно из 100% вычесть полученный размер
 
 ![bounding-box-size](https://user-images.githubusercontent.com/24504648/53287643-3ffeeb00-3790-11e9-9fb9-83083505091e.png)
+
+## Deploy
+
+1. Мы разместили backend на heroku, теперь нам нужно заменить все url которые обращаются к backend, ссылку на web url можно получить командой `heroku info` или в личном кабинете, например было `fetch("http://localhost:3001/image")`, стало `fetch("https://recognition-api.herokuapp.com/image")`
+
+2. Frontend разместим тоже на heroku `heroku create your_app_name`
+
+3. Deploy `git add .` `git commit -m "changes for deploy to heroku"` `git push heroku master`
